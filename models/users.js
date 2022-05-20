@@ -12,9 +12,13 @@ const pool = new Pool({
 const getUser = (req,res)=>{
     const id = req.params.id;
 
-    console.log("id is:",id);
+    // console.log("id is:",id);
 
-    pool.query('SELECT * FROM users WHERE user_id = $1',[id],(err,result)=>{
+    const thisuser = "user"+id;
+
+    console.log(thisuser);
+
+    pool.query('SELECT * FROM users WHERE username = $1',[thisuser],(err,result)=>{
       if(result.rowCount == 0){
         return res.status(200).send(`User Does Not Exist With ID : ${id}`);
       }
